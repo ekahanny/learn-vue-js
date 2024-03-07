@@ -1,5 +1,6 @@
 // Property untuk contoh
 let dataProduct = {
+  minimum: 2.8,
   products: [
     {
       id: "429",

@@ -13,8 +13,13 @@
   </head>
   <body>
     <div class="container" id="app">
-      <!-- Utk ambil data, gunakan perulangan v-for. item adlh temporary variabel & products adlh property tempat data disimpan   -->
-      <div class="row d-flex mb-3 align-items-center" v-for="item in products">
+      <!-- Utk ambil data, gunakan perulangan v-for. item adlh temporary variabel & products adlh property tempat data disimpan -->
+      <!-- Utk perkondisian, gunakan v-if -->
+      <div
+        class="row d-flex mb-3 align-items-center"
+        v-for="item in products"
+        v-if="item.price >= Number(minimum) "
+      >
         <div class="col-sm-4">
           <!-- Mengubah value sebuah atribut dgn mengganti data dari object menggunakan v-bind -->
           <img
