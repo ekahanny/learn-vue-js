@@ -13,6 +13,18 @@
   </head>
   <body>
     <div class="container" id="app">
+      <div class="form-inline mr-auto">
+        <label for="" class="font-weight-bold mr-2">Minimum Price</label>
+        <!-- v-model digunakan utk memanipulasi property dari inputan user -->
+        <input type="number" class="form-control w-25" v-model="minimum" />
+      </div>
+      <input
+        type="range"
+        class="custom-range"
+        min="0"
+        max="30"
+        v-model="minimum"
+      />
       <!-- Utk ambil data, gunakan perulangan v-for. item adlh temporary variabel & products adlh property tempat data disimpan -->
       <!-- Utk perkondisian, gunakan v-if -->
       <div
