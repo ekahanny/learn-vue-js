@@ -11,6 +11,7 @@ let app = new Vue({
   data: {
     minimum: 2.8,
     products: null,
+    cart: [],
   },
   // Event Mounted
   mounted: function () {
@@ -31,5 +32,16 @@ let app = new Vue({
       .then((data) => {
         this.products = data;
       });
+  },
+  /*
+  Membuat func addItem yang berisi parameter
+  item (diambil dari htmlnya), kemudian isi
+  dari variabel item akan ditambahkan kedalam
+  array cart.
+  */
+  methods: {
+    addItem: function (item) {
+      this.cart.push(item);
+    },
   },
 });

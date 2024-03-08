@@ -13,6 +13,12 @@
   </head>
   <body>
     <div class="container" id="app">
+      <nav class="navbar-text ml-auto">
+        <div class="navbar-text ml-auto">
+          <b>Cart:</b>
+          <span class="badge badge-pill badge-success">{{cart.length}}</span>
+        </div>
+      </nav>
       <div class="form-inline mr-auto">
         <label for="" class="font-weight-bold mr-2">Minimum Price</label>
         <input type="number" class="form-control w-25" v-model="minimum" />
@@ -29,6 +35,10 @@
         v-for="item in products"
         v-if="item.price >= Number(minimum) "
       >
+        <div class="col-1 m-auto">
+          <!-- ketika btn diklik, maka akan menjalankan method addItem  -->
+          <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+        </div>
         <div class="col-sm-4">
           <img
             v-bind:src="item.image"
