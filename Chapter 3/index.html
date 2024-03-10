@@ -21,7 +21,8 @@
       </nav>
       <br />
       <h1>IDSHOP</h1>
-      <div class="d-flex align-items-center">
+      <!-- class html & binding class dari vue dapat bekerja dalam satu elemen yang sama -->
+      <div class="align-items-center" v-bind:class="sliderState">
         <!-- Membuat object baru yang diberi nama styles pada file app.js -->
         <!-- Implementasi array -->
         <label for="" v-bind:class="styles.label">Minimum Price</label>
@@ -29,7 +30,7 @@
         <input
           type="text"
           class="form-control mx-2"
-          v-bind:styles="{'width': '60px', 'text-align': 'center'}"
+          :style="{'width': styles.inputWidth + 'px', 'text-align': 'center'}"
           v-model="minimum"
         />
         <input
