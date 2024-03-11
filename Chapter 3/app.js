@@ -34,6 +34,12 @@ let app = new Vue({
       }, delay);
     },
     leave: function (el) {
+      /*
+        dataset digunakan utk mengakses semua atribut 
+        data yg didefinisikan pada elemen html. intinya,
+        el.dataset.index digunakan utk mengakses index 
+        
+      */
       let delay = el.dataset.index * 100;
       setTimeout(function () {
         el.className =
