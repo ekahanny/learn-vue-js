@@ -67,34 +67,45 @@
             type="range"
             class="custom-range ml-2"
             min="0"
-            max="30"
+            max="130"
             v-model="minimum"
           />
         </div>
       </transition>
-      <!-- class html & binding class dari vue dapat bekerja dalam satu elemen yang sama -->
-      <div
-        class="row d-flex mb-3 align-items-center"
-        v-for="item in products"
-        v-if="item.price >= Number(minimum) "
+
+      <!-- efek transition grup defaultnya akan diarahkan pada elemen span, maka dari itu tag diarahkan ke elemen div -->
+      <transition-group
+        name="fade"
+        tag="div"
+        enter-active-class="animated fadeInRight"
+        leave-active-class="animated fadeOutRight"
       >
-        <div class="col-1 m-auto">
-          <!-- ketika btn diklik, maka akan menjalankan method addItem  -->
-          <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+        <!-- class html & binding class dari vue dapat bekerja dalam satu elemen yang sama -->
+        <!-- key digunakan utk mengambil unique item pada looping -->
+        <div
+          class="row d-flex mb-3 align-items-center"
+          v-for="(item, index) in products"
+          :key="item.id"
+          v-if="item.price >= Number(minimum) "
+        >
+          <div class="col-1 m-auto">
+            <!-- ketika btn diklik, maka akan menjalankan method addItem  -->
+            <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+          </div>
+          <div class="col-sm-4">
+            <img
+              v-bind:src="item.image"
+              v-bind:alt="item.name"
+              class="img-fluid d-block"
+            />
+          </div>
+          <div class="col">
+            <h3 class="text-info">{{ item.name }}</h3>
+            <p class="mb-0">{{ item.description }}</p>
+            <div class="h5 float-right">Rp{{ item.price }}</div>
+          </div>
         </div>
-        <div class="col-sm-4">
-          <img
-            v-bind:src="item.image"
-            v-bind:alt="item.name"
-            class="img-fluid d-block"
-          />
-        </div>
-        <div class="col">
-          <h3 class="text-info">{{ item.name }}</h3>
-          <p class="mb-0">{{ item.description }}</p>
-          <div class="h5 float-right">Rp{{ item.price }}</div>
-        </div>
-      </div>
+      </transition-group>
     </div>
 
     <script
