@@ -74,19 +74,24 @@
       </transition>
 
       <!-- efek transition grup defaultnya akan diarahkan pada elemen span, maka dari itu tag diarahkan ke elemen div -->
+      <!-- membuat event method utk before, enter, dan leave -->
       <transition-group
         name="fade"
         tag="div"
-        enter-active-class="animated fadeInRight"
-        leave-active-class="animated fadeOutRight"
+        @beforeEnter="before"
+        @enter="enter"
+        @leave="leave"
       >
         <!-- class html & binding class dari vue dapat bekerja dalam satu elemen yang sama -->
         <!-- key digunakan utk mengambil unique item pada looping -->
+        <!-- (item, index) artinya nilai indeks dari setiap elemen dalam array items -->
+        <!-- data-index pada html memasukkan nilai index ke dalam atribut data "index"  -->
         <div
-          class="row d-flex mb-3 align-items-center"
+          class="row d-none mb-3 align-items-center"
           v-for="(item, index) in products"
           :key="item.id"
           v-if="item.price >= Number(minimum) "
+          :data-index="index"
         >
           <div class="col-1 m-auto">
             <!-- ketika btn diklik, maka akan menjalankan method addItem  -->
