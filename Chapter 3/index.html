@@ -15,6 +15,10 @@
       integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>VueJS Basic</title>
   </head>
@@ -38,7 +42,12 @@
       <br />
       <h1>IDSHOP</h1>
       <!-- transition merupakan bawaan dari vue utk membuat transisi -->
-      <transition name="fade">
+      <!-- yang memiliki value animated dibuat menggunakan library animate.css -->
+      <transition
+        name="custom"
+        enter-active-class="animated fadeInDown"
+        leave-active-class="animated slideOutRight"
+      >
         <div
           v-if="styles.sliderStatus"
           class="align-items-center"
