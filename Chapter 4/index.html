@@ -41,10 +41,9 @@
               aria-expanded="false"
               class="btn btn-success btn-sm dropdown-toggle"
             >
-              <b>Cart:</b>
-              <span class="badge badge-pill badge-success"
-                >{{cart.length}}</span
-              >
+              <span class="badge badge-pill badge-light">{{ cartQty }}</span>
+              <i class="fas fa-shopping-cart mx-2"></i>
+              {{ cartTotal | currencyFormat }}
             </button>
             <div
               class="dropdown-menu dropdown-menu-right"
