@@ -50,15 +50,17 @@
               class="dropdown-menu dropdown-menu-right"
               aria-labelledby="dropdownCart"
             >
-              <div v-for="(item, index) in cart" :key="index">
+              <div v-for="(cartItem, index) in cart" :key="index">
                 <div class="dropdown-item-text text-nowrap text-right">
                   <span
                     class="badge badge-pill badge-warning align-text-top mr-1"
                   >
-                    {{item.qty}}
+                    {{cartItem.qty}}
                   </span>
-                  {{item.name}}
-                  <b>{{item.price | currencyFormat }}</b>
+                  {{cartItem.items.name}}
+                  <b
+                    >{{cartItem.items.price * cartItem.qty | currencyFormat}}</b
+                  >
                 </div>
               </div>
             </div>

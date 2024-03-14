@@ -52,8 +52,33 @@ let app = new Vue({
           "row d-flex mb-3 align-items-center animated fadeOutRight";
       }, delay);
     },
-    addItem: function (item) {
-      this.cart.push(item);
+    addItem: function (itemToAdd) {
+      /*
+      1. menyimpan nilai index item kedalam data cart
+      2. mencari apakah ada item didlm cart dgn id tertentu
+      3. jika ada, kita ambil nilai index dari item tsb
+      4. jika sdh ada indexnya, kita buat property qty
+      */
+      let itemIndex;
+      let itemExist = this.cart.filter(function (cartItem, index) {
+        /*
+        cartItem.items.id -> mengacu pada id dari item yang sudah ada dalam keranjang
+        itemToAdd.id ->  mengacu pada id dari item yang akan ditambahkan ke keranjang
+        */
+        if (cartItem.items.id == Number(itemToAdd.id)) {
+          itemIndex = index;
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (itemExist.length > 0) {
+        this.cart[itemIndex].qty++;
+      } else {
+        // masing-masing item akan memiliki kuantitas
+        this.cart.push({ items: itemToAdd, qty: 1 });
+      }
     },
   },
 });
