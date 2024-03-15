@@ -33,7 +33,7 @@
           >
             <i class="fas fa-dollar-sign"></i>
           </button>
-          <div class="ml-2">
+          <div class="dropdown ml-2" v-if="cart.length > 0">
             <button
               id="dropdownCart"
               data-toggle="dropdown"
@@ -41,7 +41,7 @@
               aria-expanded="false"
               class="btn btn-success btn-sm dropdown-toggle"
             >
-              <span class="badge badge-pill badge-light">{{ cartQty }}</span>
+              <span class="badge badge-pill badge-success">{{ cartQty }}</span>
               <i class="fas fa-shopping-cart mx-2"></i>
               {{ cartTotal | currencyFormat }}
             </button>
@@ -59,6 +59,13 @@
                   {{cartItem.items.name}}
                   <b
                     >{{cartItem.items.price * cartItem.qty | currencyFormat}}</b
+                  >
+                  <!-- stop berfungsi sbg event prevent agar dropdown tidak tertutup ketika sebuah item dihapus -->
+                  <a
+                    href="#"
+                    class="badge badge-danger text-white"
+                    @click.stop="deleteItem(index)"
+                    >-</a
                   >
                 </div>
               </div>
@@ -122,7 +129,7 @@
         >
           <div class="col-1 m-auto">
             <!-- ketika btn diklik, maka akan menjalankan method addItem  -->
-            <button class="btn btn-info" v-on:click="addItem(item)">+</button>
+            <button class="btn btn-info" @click.stop="addItem(item)">+</button>
           </div>
           <div class="col-sm-4">
             <img

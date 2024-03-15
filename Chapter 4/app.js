@@ -86,12 +86,18 @@ let app = new Vue({
           return false;
         }
       });
-
       if (itemExist.length > 0) {
         this.cart[itemIndex].qty++;
       } else {
         // masing-masing item akan memiliki kuantitas
         this.cart.push({ items: itemToAdd, qty: 1 });
+      }
+    },
+    deleteItem: function (key) {
+      if (this.cart[key].qty > 1) {
+        this.cart[key].qty--;
+      } else {
+        this.cart.splice(key, 1);
       }
     },
   },
