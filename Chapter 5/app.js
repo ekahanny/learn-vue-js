@@ -12,12 +12,10 @@ dalam bentuk object.
 
 Vue.component("price", {
   data: function () {
-    return {
-      prefix: "Rp ",
-      value: 0,
-      precision: 2, // 2 angka belakang koma
-    };
+    return {};
   },
+  // props : mengirim data ke suatu component
+  props: ["value", "prefix", "precision"],
   template:
     "<span>{{ this.prefix + Number.parseFloat(this.value).toFixed(this.precision) }}</span>",
 });
