@@ -31,6 +31,71 @@ Vue.component("price", {
     "<span>{{ this.prefix + Number.parseFloat(this.value).toFixed(this.precision) }}</span>",
 });
 
+Vue.component("product-list", {
+  props: ["products", "minimum"],
+  /* 
+  Method before, enter, leave yg sebelumnya berada
+  pada parent object harus dipindahkan kedalam scope
+  component product-list agar dpt digunakan pada 
+  component itu sendiri.
+  */
+  methods: {
+    before: function (el) {
+      el.className = "d-none";
+    },
+    enter: function (el) {
+      var delay = el.dataset.index * 100;
+      setTimeout(function () {
+        el.className =
+          "row d-flex mb-3 align-items-center animated fadeInRight";
+      }, delay);
+    },
+    leave: function (el) {
+      var delay = el.dataset.index * 100;
+      setTimeout(function () {
+        el.className =
+          "row d-flex mb-3 align-items-center animated fadeOutRight";
+      }, delay);
+    },
+  },
+  template: `
+  <transition-group
+  name="fade"
+  tag="div"
+  @beforeEnter="before"
+  @enter="enter"
+  @leave="leave"
+>
+  <div
+    class="row d-none mb-3 align-items-center"
+    v-for="(item, index) in products"
+    :key="item.id"
+    v-if="item.price >= Number(minimum) "
+    :data-index="index"
+  >
+    <div class="col-1 m-auto">
+      <button class="btn btn-info" @click.stop="addItem(item)">+</button>
+    </div>
+    <div class="col-sm-4">
+      <img
+        v-bind:src="item.image"
+        v-bind:alt="item.name"
+        class="img-fluid d-block"
+      />
+    </div>
+    <div class="col">
+      <h3 class="text-info">{{ item.name }}</h3>
+      <p class="mb-0">{{ item.description }}</p>
+      <div class="h5 float-right">
+        <!-- value adlh bagian dari props yg nilainya diambil dari params item pada addItem -->
+        <price :value="Number(item.price)" :prefix="'Rp '" :precision="2"></price>
+      </div>
+    </div>
+  </div>
+</transition-group>
+  `,
+});
+
 let app = new Vue({
   el: "#app",
   data: {
@@ -75,23 +140,6 @@ let app = new Vue({
     },
   },
   methods: {
-    before: function (el) {
-      el.className = "d-none";
-    },
-    enter: function (el) {
-      let delay = el.dataset.index * 100;
-      setTimeout(function () {
-        el.className =
-          "row d-flex mb-3 align-items-center animated fadeInRight";
-      }, delay);
-    },
-    leave: function (el) {
-      let delay = el.dataset.index * 100;
-      setTimeout(function () {
-        el.className =
-          "row d-flex mb-3 align-items-center animated fadeOutRight";
-      }, delay);
-    },
     addItem: function (itemToAdd) {
       let itemIndex;
       let itemExist = this.cart.filter(function (cartItem, index) {
