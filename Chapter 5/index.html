@@ -101,8 +101,12 @@
           />
         </div>
       </transition>
-
-      <product-list :minimum="minimum" :products="products"></product-list>
+      <!-- emit (pada kasus ini @add) digunakan utk mengakses suatu event dari parent component ke component lain -->
+      <product-list
+        :minimum="minimum"
+        :products="products"
+        @add="addItem"
+      ></product-list>
     </div>
 
     <script

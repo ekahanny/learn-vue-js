@@ -58,6 +58,7 @@ Vue.component("product-list", {
       }, delay);
     },
   },
+  // emitting (baris 78) -> emitnya diberi nama add kemudian mengirim data yg diambil dari variabel item pada looping
   template: `
   <transition-group
   name="fade"
@@ -74,7 +75,7 @@ Vue.component("product-list", {
     :data-index="index"
   >
     <div class="col-1 m-auto">
-      <button class="btn btn-info" @click.stop="addItem(item)">+</button>
+      <button class="btn btn-info" @click.stop="$emit('add', item)">+</button>
     </div>
     <div class="col-sm-4">
       <img
