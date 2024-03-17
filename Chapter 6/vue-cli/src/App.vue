@@ -2,15 +2,13 @@
   <!-- satu component memiliki satu div utama saja -->
   <div id="app" class="container mt-5">
     <h1>IDShop</h1>
-    <p class="animated fadeInRight">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat a
-      dignissimos laudantium id? Eius laboriosam sint recusandae molestias
-      voluptatum eligendi rem dolores labore perferendis dicta! Voluptates
-      magnam tenetur rerum facere.
-    </p>
+    <price-slider
+      :sliderStatus="style.sliderStatus"
+      v-model="maximum"
+    ></price-slider>
     <product-list
-      :products="products"
       :maximum="maximum"
+      :products="products"
       @add="addItem"
     ></product-list>
   </div>
@@ -18,6 +16,7 @@
 
 <script>
 import productList from "./components/product-list.vue";
+import priceSlider from "./components/price-slider.vue";
 
 export default {
   name: "App",
@@ -26,10 +25,14 @@ export default {
       maximum: 50,
       products: [],
       cart: [],
+      style: {
+        sliderStatus: true,
+      },
     };
   },
   components: {
     productList,
+    priceSlider,
   },
   mounted: function () {
     fetch("https://hplussport.com/api/products/order/price")
