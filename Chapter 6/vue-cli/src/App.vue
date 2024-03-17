@@ -8,20 +8,30 @@
       voluptatum eligendi rem dolores labore perferendis dicta! Voluptates
       magnam tenetur rerum facere.
     </p>
-    <font-awesome-icon icon="shopping-cart"></font-awesome-icon>
-    <price class="m-2" :value="4.23"></price>
+    <product-list :products="products" :maximum="maximum"></product-list>
   </div>
 </template>
 
 <script>
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import Price from "./components/Price-item.vue";
+import productList from "./components/product-list.vue";
 
 export default {
   name: "App",
+  data: function () {
+    return {
+      maximum: 50,
+      products: [],
+    };
+  },
   components: {
-    FontAwesomeIcon,
-    Price,
+    productList,
+  },
+  mounted: function () {
+    fetch("https://hplussport.com/api/products/order/price")
+      .then((response) => response.json())
+      .then((data) => {
+        this.products = data;
+      });
   },
 };
 </script>
