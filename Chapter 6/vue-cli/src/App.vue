@@ -8,7 +8,11 @@
       voluptatum eligendi rem dolores labore perferendis dicta! Voluptates
       magnam tenetur rerum facere.
     </p>
-    <product-list :products="products" :maximum="maximum"></product-list>
+    <product-list
+      :products="products"
+      :maximum="maximum"
+      @add="addItem"
+    ></product-list>
   </div>
 </template>
 
@@ -21,6 +25,7 @@ export default {
     return {
       maximum: 50,
       products: [],
+      cart: [],
     };
   },
   components: {
@@ -32,6 +37,25 @@ export default {
       .then((data) => {
         this.products = data;
       });
+  },
+  methods: {
+    addItem: function (itemToAdd) {
+      let itemIndex;
+      let itemExist = this.cart.filter(function (cartItem, index) {
+        if (cartItem.items.id == Number(itemToAdd.id)) {
+          itemIndex = index;
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (itemExist.length > 0) {
+        this.cart[itemIndex].qty++;
+      } else {
+        this.cart.push({ items: itemToAdd, qty: 1 });
+      }
+    },
   },
 };
 </script>
