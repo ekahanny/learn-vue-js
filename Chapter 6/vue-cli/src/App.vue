@@ -9,16 +9,19 @@
       magnam tenetur rerum facere.
     </p>
     <font-awesome-icon icon="shopping-cart"></font-awesome-icon>
+    <price class="m-2" :value="4.23"></price>
   </div>
 </template>
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import Price from "./components/Price-item.vue";
 
 export default {
   name: "App",
   components: {
     FontAwesomeIcon,
+    Price,
   },
 };
 </script>
