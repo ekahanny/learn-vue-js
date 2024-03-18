@@ -22,7 +22,7 @@
         <h3 class="text-info">{{ item.name }}</h3>
         <p class="mb-0">{{ item.description }}</p>
         <div class="h5 float-right">
-          <price :value="Number(item.price)" :precision="2"></price>
+          <price-item :value="Number(item.price)" :precision="2"></price-item>
         </div>
       </div>
     </div>
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import Price from "./price-item.vue";
+import priceItem from "./price-item.vue";
 export default {
   name: "product-list",
   components: {
-    Price,
+    priceItem,
   },
   props: ["products", "maximum"],
   computed: {

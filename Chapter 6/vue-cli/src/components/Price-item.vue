@@ -10,7 +10,7 @@ export default {
     value: Number,
     prefix: {
       type: String,
-      default: "Rp ",
+      default: "Rp",
     },
     precision: {
       type: Number,
